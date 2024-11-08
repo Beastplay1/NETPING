@@ -28,6 +28,6 @@
 ## Usage:
 Run the script:
 ```bash
-   python3 netping.py
+python3 netping.py
 ```
 
