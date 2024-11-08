@@ -16,11 +16,14 @@
 ## Installation:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/NETPING.git
-2. Install required dependencies
-  ```bash
+   git clone https://github.com/beastplay1/NETPING.git
+2. Open the folder:
+   ```bash
+   cd NETPING/
+3. Install required dependencies
+   ```bash
    pip install -r requirements.txt
-```
+   ```
 
 ## Usage:
 Run the script:
