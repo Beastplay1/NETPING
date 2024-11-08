@@ -15,10 +15,8 @@ import time
 #
 #   Author: Beast, Hades
 
-# Initialize colorama
 init(autoreset=True)
 
-# ASCII art header
 ascii_art = pyfiglet.figlet_format("NETPING", font="slant")
 print(Fore.CYAN + ascii_art)
 
