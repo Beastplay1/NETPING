@@ -20,5 +20,11 @@
 2. Install required dependencies
   ```bash
    pip install -r requirements.txt
+```
 
 ## Usage:
+Run the script:
+```bash
+   python netping.py
+```
+
