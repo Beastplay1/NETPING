@@ -20,7 +20,7 @@ ascii_art = pyfiglet.figlet_format("NETPING", font="slant")
 print(Fore.CYAN + ascii_art)
 
 parser = argparse.ArgumentParser(description="Network ping scanner tool.")
-parser.add_argument("-c", "--count", type=int, default=1, help="Number of pings per device")
+parser.add_argument("-c", "--count", type=int, default=1, help="Number of pings per device (default value is 1)")
 parser.add_argument("-o", "--output", type=str, help="Output file for results")
 parser.add_argument("-v", "--verbose", action="store_true", help="Enable detailed output")
 
