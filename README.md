@@ -27,7 +27,7 @@
 
 ## Usage:
 Run the script:
-```bash
-python3 netping.py
-```
+   ```bash
+   python3 netping.py
+   ```
 
