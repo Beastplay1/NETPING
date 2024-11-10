@@ -43,10 +43,11 @@ def get_local_ip():
 local_ip = get_local_ip()
 if local_ip:
     print(Fore.GREEN + f"Your local IP address: {local_ip}")
+    network = ipaddress.ip_network(local_ip + '/24', strict=False)  
 else:
     print(Fore.RED + "Failed to retrieve the local IP address.")
+    sys.exit()
 
-network = ipaddress.ip_network(local_ip + '/24', strict=False)
 ping_count = args.count
 param = '-n' if platform.system().lower() == 'windows' else '-c'
 output_file = None
