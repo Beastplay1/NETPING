@@ -100,6 +100,6 @@ finally:
                 print(Fore.CYAN + "Results not saved.")
                 break
             else:
-                print(Fore.RED + "Pleas type only 'y' or 'n'.")
+                print(Fore.RED + "Please type only 'y' or 'n'.")
     print(Fore.GREEN + "Exiting program...")
     time.sleep(1)
