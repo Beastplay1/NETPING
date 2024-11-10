@@ -30,4 +30,3 @@ Run the script:
    ```bash
    python3 netping.py
    ```
-

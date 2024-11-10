@@ -2,10 +2,11 @@ import socket
 import ipaddress
 import subprocess
 import platform
-from colorama import Fore, init
+from colorama import Fore, init, Style
 import pyfiglet
 import argparse
 import sys
+import time
 
 #      _   __________________  _____   ________
 #     / | / / ____/_  __/ __ \/  _/ | / / ____/
@@ -17,7 +18,7 @@ import sys
 
 init(autoreset=True)
 ascii_art = pyfiglet.figlet_format("NETPING", font="slant")
-print(Fore.CYAN + ascii_art)
+print(Fore.MAGENTA + ascii_art)
 
 parser = argparse.ArgumentParser(description="Network ping scanner tool.")
 parser.add_argument("-c", "--count", type=int, default=1, help="Number of pings per device (default value is 1)")
@@ -72,7 +73,8 @@ try:
         results.append(status)
 
 except KeyboardInterrupt:
-    print(Fore.YELLOW + "\nScan interrupted by user. Saving results...")
+    print(Fore.YELLOW + "\nScan interrupted by user!")
+    
 
 finally:
     if output_file:
@@ -81,4 +83,22 @@ finally:
         print(Fore.CYAN + f"\nResults saved to {args.output}")
     elif not args.output and results:
         print(Fore.YELLOW + "\nResults:\n" + "\n".join(results))
-    print(Fore.GREEN + "Exiting program.")
+        while True:
+            save = input(Fore.CYAN + "\nWould you like to save the results to a file? (y/n): ").strip().lower()
+            if save == 'y':
+                filename = input(Fore.CYAN + "Enter filename to save results: ").strip()  
+                print(Fore.YELLOW + f"Saving results to {filename}...")
+                for _ in range(3):
+                    print(Fore.CYAN + ".", end="", flush=True)
+                    time.sleep(1.2)
+                print()
+                with open(filename, "w") as f:
+                    f.write("\n".join(results) + "\n")
+                break
+            elif save == 'n':
+                print(Fore.CYAN + "Results not saved.")
+                break
+            else:
+                print(Fore.RED + "Pleas type only 'y' or 'n'.")
+    print(Fore.GREEN + "Exiting program...")
+    time.sleep(1)
