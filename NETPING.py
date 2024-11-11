@@ -18,12 +18,13 @@ import time
 
 init(autoreset=True)
 ascii_art = pyfiglet.figlet_format("NETPING", font="slant")
-print(Fore.MAGENTA + ascii_art)
+print(Fore.LIGHTGREEN_EX + ascii_art)
 
 parser = argparse.ArgumentParser(description="Network ping scanner tool.")
 parser.add_argument("-c", "--count", type=int, default=1, help="Number of pings per device (default value is 1)")
 parser.add_argument("-o", "--output", type=str, help="Output file for results")
 parser.add_argument("-v", "--verbose", action="store_true", help="Enable detailed output")
+parser.add_argument("-p", "--portscan", action="store_true", help="Scans common ports on devices")
 
 if len(sys.argv) == 1:
     parser.print_help()
@@ -52,6 +53,7 @@ ping_count = args.count
 param = '-n' if platform.system().lower() == 'windows' else '-c'
 output_file = None
 results = []
+common_ports = [22,80,443,8080]
 
 try:
     if args.output:
@@ -67,6 +69,26 @@ try:
         elif result.returncode == 0:
             status = f"{ip_str} is reachable"
             print(Fore.GREEN + f"Scanning Network: {status}")
+            
+            if args.portscan:
+                port_results = []
+                for port in common_ports:
+                    try:
+                        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                            sock.settimeout(1)
+                            result = sock.connect_ex((ip_str, port))
+                            if result == 0:
+                                port_status = f"Port {port} is open on {ip_str}"
+                                print(Fore.GREEN + f"Port Scan: {port_status}")
+                            else:
+                                port_status = f"Port {port} is closed on {ip_str}"
+                                print(Fore.RED + f"Port Scan: {port_status}")
+                            port_results.append(port_status)
+                    except Exception as e:
+                        port_status = f"Port {port} scan failed on {ip_str}: {e}"
+                        print(Fore.RED + f"Port Scan: {port_status}")
+                        port_results.append(port_status)
+                    results.extend(port_results)
         else:
             status = f"{ip_str} is unreachable (Error in ping response)"
             print(Fore.YELLOW + f"Scanning Network: {status}")
