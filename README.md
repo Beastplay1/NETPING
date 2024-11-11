@@ -43,7 +43,7 @@ or:
    ./netping.sh
    ```
 
-##Example:
+## Example:
 ```
 python3 .\NETPING.py
     _   __________________  _____   ________
