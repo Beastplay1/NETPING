@@ -24,9 +24,21 @@
    ```bash
    pip install -r requirements.txt
    ```
-
+4. for python version:
+   ```bash
+   cd python_version/
+   ```
+   for bash version:
+   ```bash
+   cd bash_version/
+   ```
 ## Usage:
 Run the script:
    ```bash
    python3 netping.py
+   ```
+or:
+   ```bash
+   chmod +x netping.sh
+   ./netping.sh
    ```
