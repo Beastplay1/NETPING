@@ -8,6 +8,13 @@ import argparse
 import sys
 import time
 
+#TODO
+#1. Add a function to check if the target is online
+#2. Add a function to check if the target is vulnerable to a specific exploit
+#3. Add all common ports
+
+
+
 #      _   __________________  _____   ________
 #     / | / / ____/_  __/ __ \/  _/ | / / ____/
 #    /  |/ / __/   / / / /_/ // //  |/ / / __  
