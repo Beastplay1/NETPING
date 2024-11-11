@@ -1,6 +1,6 @@
 # NETPING
 
-**NETPING** is a miscellaneous network tool available in both Python and Bash versions, designed for quick and efficient network diagnostics. Use NETPING to check device reachability and scan for open services across your network with ease. This tool is ideal for users who need to identify live hosts and determine the availability of specific services on common ports.
+**NETPING** is a miscellaneous multi-platform network tool available in both Python and Bash versions, designed for quick and efficient network diagnostics. Use NETPING to check device reachability and scan for open services across your network with ease. This tool is ideal for users who need to identify live hosts and determine the availability of specific services on common ports.
 
 ## Features:
 - Automatically detects your local IP address.
