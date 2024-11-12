@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Colors for output
 GREEN='\033[1;32m'
 RED='\033[1;31m'
 YELLOW='\033[1;33m'
 CYAN='\033[1;36m'
 RESET='\033[0m'
 
-# ASCII Art Banner
 echo -e "${GREEN}"
 echo "   _   __________________  _____   ________ "
 echo "  / | / / ____/_  __/ __ \/  _/ | / / ____/ "
@@ -18,7 +16,6 @@ echo
 echo "   Network Ping Scanner Tool by Beast, Hades"
 echo -e "${RESET}"
 
-# Check if no arguments were passed and display help if so
 if [[ "$#" -eq 0 ]]; then
     echo -e "${CYAN}Usage: $0 [-c count] [-o output_file] [-v] [-p]${RESET}"
     echo "Options:"
@@ -30,14 +27,12 @@ if [[ "$#" -eq 0 ]]; then
     exit 0
 fi
 
-# Default variables
 ping_count=1
 output_file=""
 verbose=0
 portscan=0
 common_ports=(22 80 443 8080)
 
-# Argument parsing
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -c|--count) ping_count="$2"; shift ;;
@@ -59,7 +54,6 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# Determine local IP and network
 local_ip=$(hostname -I | awk '{print $1}')
 if [[ -z "$local_ip" ]]; then
     echo -e "${RED}Could not determine the local IP address.${RESET}"
@@ -68,7 +62,6 @@ fi
 echo -e "${GREEN}Your local IP address: ${local_ip}${RESET}"
 network="${local_ip%.*}.0/24"
 
-# Ping and Port Scan function
 function scan_host {
     local ip="$1"
     if ping -c "$ping_count" -W 1 "$ip" > /dev/null 2>&1; then
@@ -93,13 +86,11 @@ function scan_host {
     fi
 }
 
-# Main scanning loop
 results=()
 for ip in $(nmap -n -sn "$network" | grep "Nmap scan report" | awk '{print $5}'); do
     scan_host "$ip"
 done
 
-# Saving results to a file
 if [[ -n "$output_file" ]]; then
     echo -e "${CYAN}Saving results to $output_file...${RESET}"
     printf "%s\n" "${results[@]}" > "$output_file"
